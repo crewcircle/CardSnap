@@ -76,5 +76,4 @@ docs/
 fastlane/
 scripts/
 setup-and-verify.sh
-tests/
 vendor/
