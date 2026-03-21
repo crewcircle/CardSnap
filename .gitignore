@@ -1,0 +1,83 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# ios
+/Pods
+/*.xcworkspace
+
+# android
+/.gradle
+/**/build
+/*/gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar) in gradle-wrapper.properties
+!/gradle-wrapper.jar
+
+# Misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Expo
+.expo
+webpack.config.js
+
+# Watchman
+.watchmanconfig
+
+# CodePush
+.codepush/
+
+# Symbolication
+/symbols/
+
+# Firebase
+/firebase.json
+
+# Xcode
+ DerivedData/
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+![Aa]*.xcassets
+
+# CocoaPods
+Pods/
+
+# Buck
+.buckd/
+*.asc
+
+# fb-schema/
+*fb-schema*.txt
+
+# RNCLI
+.rncache/
+
+# Superseded by React Native 0.65
+/.expo/
+
+# Additional files to ignore
+.sisyphus/
+.superset/
+AGENTS.md
+App.tsx
+Gemfile
+Gemfile.lock
+__tests__/
+docs/
+fastlane/
+index.js
+scripts/
+setup-and-verify.sh
+tests/
+vendor/
