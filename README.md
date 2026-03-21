@@ -1,143 +1,84 @@
 # Card Scanner App
 
-A business card scanner application built with React Native that allows users to scan business cards, extract contact information using OCR, save contacts, and export them in various formats.
+A simple and efficient business card scanner application built with React Native.
+
+## Overview
+
+This application allows users to scan business cards using their device's camera, extract text using OCR technology, parse contact information, and save or export the contacts in various formats.
 
 ## Features
 
-- Scan business cards using device camera
-- Extract text using OCR (Tesseract)
-- Parse contact information (name, email, phone, company, website)
-- Save contacts to device storage (MMKV)
-- Export contacts as VCard
-- View and manage saved contacts
-- Configure OCR languages
-- Basic settings (auto-save, notifications, data usage)
+- **Card Scanning**: Use your device camera to capture business cards
+- **Text Extraction**: Utilizes OCR technology to extract text from scanned cards
+- **Contact Parsing**: Automatically identifies and extracts contact details (name, email, phone, company, website)
+- **Contact Storage**: Saves contacts locally on your device
+- **Export Options**: Export contacts as VCard files for easy sharing
+- **Contact Management**: View and manage your saved contacts within the app
+- **Settings**: Configure OCR languages and other preferences
 
-## Project Structure
-
-```
-CardScannerApp/
-├─ src/
-│  ├─ navigation/      # Navigation containers
-│  ├─ screens/         # Screen components
-│  ├─ utils/           # Utility functions (storage, export, error handling)
-│  └─ assets/          # Static assets (images, icons)
-├─ android/            # Android project files
-├─ ios/                # iOS project files
-└─ ...                 # Configuration files
-```
-
-## Setup Instructions
+## Getting Started
 
 ### Prerequisites
 
-- Node.js (v14 or later)
-- npm or yarn
+- Node.js (version 14 or later)
+- npm or yarn package manager
 - Xcode (for iOS development)
 - Android Studio (for Android development)
 - CocoaPods (for iOS dependencies)
 
 ### Installation
 
-1. Clone the repository
+1. Clone this repository to your local machine
 2. Navigate to the project directory:
    ```bash
-   cd business-card-scanner/CardScannerApp
+   cd CardScannerApp
    ```
-3. Install JavaScript dependencies:
+3. Install the required JavaScript dependencies:
    ```bash
    npm install
    ```
-4. Install iOS dependencies:
+4. For iOS development, install the required pods:
    ```bash
    cd ios && pod install && cd ..
    ```
 
-### Running the App
+### Running the Application
 
-#### iOS Simulator
+#### On iOS Simulator
+
 ```bash
 npm run ios
 ```
 
-#### Android Emulator
+#### On Android Emulator
+
 ```bash
 npm run android
 ```
 
-## Development Status
+## How It Works
 
-### Completed Features
-- [x] Project setup with React Native 0.74.0
-- [x] Navigation structure (Scan, Contacts, Settings tabs)
-- [x] Scanner screen with camera integration
-- [x] OCR text extraction using Tesseract
-- [x] Contact information parsing
-- [x] Contact saving using MMKV storage
-- [x] Contact export as VCard
-- [x] Contacts screen to view saved contacts
-- [x] Settings screen for configuration
-- [x] Basic error handling
+1. Launch the app and grant camera permissions when prompted
+2. Point your device's camera at a business card
+3. Tap the capture button to take a photo of the card
+4. The app processes the image using OCR to extract text
+5. Contact information is automatically parsed from the extracted text
+6. Review the detected information and save or export the contact as needed
 
-### In Progress
-- [ ] Improve OCR accuracy and language support
-- [ ] Enhance contact parsing with more sophisticated NLP
-- [ ] Add batch scanning capability
-- [ ] Implement contact deduplication
-- [ ] Add CSV export functionality
-- [ ] Improve UI/UX with loading states and better feedback
-- [ ] Add unit and integration tests
-- [ ] Performance optimization
-
-### Future Features (Post-MVP)
-- [ ] CRM integrations (Salesforce, HubSpot, etc.)
-- [ ] AI-powered contact insights and scoring
-- [ ] Team collaboration features
-- [ ] Advanced analytics and reporting
-- [ ] Offline-first architecture with conflict resolution
-- [ ] Customizable contact fields
-- [ ] Voice notes attachment to contacts
-- [ ] LinkedIn integration
-
-## Technical Stack
+## Technology Stack
 
 - **Framework**: React Native 0.74.0
-- **Language**: TypeScript
-- **State Management**: React hooks with MMKV for persistent storage
-- **Navigation**: React Navigation (native stack and bottom tabs)
-- **Camera**: react-native-vision-camera
-- **OCR**: react-native-tesseract-ocr
-- **Storage**: MMKV (mobile key-value storage)
-- **Export**: expo-file-system and expo-sharing
-- **UI Components**: Custom components with StyleSheet and @expo/vector-icons
-- **Error Handling**: Custom error utility with alert display
+- **Programming Language**: TypeScript
+- **Camera Access**: react-native-vision-camera
+- **OCR Processing**: rn-mlkit-ocr (Google ML Kit)
+- **Local Storage**: @react-native-async-storage/async-storage
+- **Navigation**: @react-navigation/native and related packages
+- **File System**: react-native-fs
+- **Sharing**: react-native-share
+- **UI Components**: React Native core components and react-native-vector-icons
 
-## Configuration
+## Notes
 
-### OCR Languages
-The app supports multiple languages for OCR. By default, only English is enabled. To add more languages:
-1. Go to Settings
-2. Select the desired languages under OCR Settings
-3. The app will use the selected languages for text recognition
-
-### Storage
-Contacts are stored locally using MMKV. Data persists between app sessions but is removed when the app is deleted.
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- React Native community for the excellent framework
-- Tesseract OCR team for the open-source OCR engine
-- Expo for file system and sharing utilities
-- MMKV for fast persistent storage
+- The application requires camera access to function
+- Contact data is stored locally on your device and is not shared with any external services
+- For optimal OCR results, ensure good lighting and a clear, well-focused image of the business card
