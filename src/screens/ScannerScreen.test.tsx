@@ -1,5 +1,4 @@
-import React from "react";
-import { Alert, View } from "react-native";
+import { Alert } from "react-native";
 import {
   fireEvent,
   render,
