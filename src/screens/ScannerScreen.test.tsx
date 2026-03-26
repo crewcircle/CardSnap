@@ -17,6 +17,7 @@ const mockTakePhoto = jest.fn();
 const mockRequestCameraPermission = jest.fn();
 
 jest.mock("@react-navigation/native", () => {
+  const React = require("react");
   return {
     useFocusEffect: (callback: () => void | (() => void)) => {
       React.useEffect(() => {
@@ -28,6 +29,8 @@ jest.mock("@react-navigation/native", () => {
 });
 
 jest.mock("react-native-vision-camera", () => {
+  const React = require("react");
+  const { View } = require("react-native");
   const MockCamera = React.forwardRef((_props: unknown, ref: unknown) => {
     React.useImperativeHandle(ref, () => ({
       takePhoto: mockTakePhoto,

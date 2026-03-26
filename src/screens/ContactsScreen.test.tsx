@@ -16,6 +16,7 @@ import { showErrorAlert } from "../utils/errorHandler";
 const mockNavigate = jest.fn();
 
 jest.mock("@react-navigation/native", () => {
+  const React = require("react");
   return {
     useNavigation: () => ({
       navigate: mockNavigate,
