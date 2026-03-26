@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NODE_VERSION: 18.x
+      NODE_VERSION: 20.x
       JAVA_VERSION: 17
 
     steps:

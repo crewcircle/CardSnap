@@ -11,7 +11,7 @@ jobs:
     runs-on: macos-latest
 
     env:
-      NODE_VERSION: 18.x
+      NODE_VERSION: 20.x
 
     steps:
       - name: Checkout code
