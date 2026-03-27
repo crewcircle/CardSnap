@@ -4,14 +4,12 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-    includeBuild("../node_modules/@react-native/gradle-plugin")
-}
-
-plugins {
-    id("com.facebook.react.rootproject")
+    includeBuild('../node_modules/@react-native/gradle-plugin')
 }
 
 rootProject.name = 'CardScannerApp'
+
+includeBuild('../node_modules/@react-native/gradle-plugin')
 
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 
