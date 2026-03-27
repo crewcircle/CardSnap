@@ -47,7 +47,8 @@
     "release:ios": "bash scripts/build-release.sh ios",
     "release:android": "bash scripts/build-release.sh android",
     "release:verify": "bash scripts/verify-release.sh",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "prepare": "patch-package"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
