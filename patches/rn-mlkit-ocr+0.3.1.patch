@@ -1,0 +1,28 @@
+diff --git a/node_modules/rn-mlkit-ocr/RnMlkitOcr.podspec b/node_modules/rn-mlkit-ocr/RnMlkitOcr.podspec
+index 18839e5..174b712 100644
+--- a/node_modules/rn-mlkit-ocr/RnMlkitOcr.podspec
++++ b/node_modules/rn-mlkit-ocr/RnMlkitOcr.podspec
+@@ -20,6 +20,15 @@ Pod::Spec.new do |s|
+ 
+   s.dependency "React-Core"
+   
++  s.pod_target_xcconfig = {
++    'DEFINES_MODULE' => 'YES',
++    'SWIFT_OBJC_BRIDGING_HEADER' => '$(PODS_TARGET_SRCROOT)/ios/RnMlkitOcr-Bridging-Header.h'
++  }
++  
++  s.user_target_xcconfig = {
++    'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES'
++  }
++
+   if selected_subspecs.include?('latin')
+     s.dependency 'GoogleMLKit/TextRecognition', '9.0.0'
+   end
+diff --git a/node_modules/rn-mlkit-ocr/ios/RnMlkitOcr-Bridging-Header.h b/node_modules/rn-mlkit-ocr/ios/RnMlkitOcr-Bridging-Header.h
+new file mode 100644
+index 0000000..fb11ecb
+--- /dev/null
++++ b/node_modules/rn-mlkit-ocr/ios/RnMlkitOcr-Bridging-Header.h
+@@ -0,0 +1,2 @@
++#import <React/RCTBridgeModule.h>
++#import <React/RCTEventEmitter.h>
