@@ -32,7 +32,7 @@ class LaunchArgsModule(
             val intent = activity.intent
             val extras = intent?.extras
             if (extras != null) {
-                for (key in extras.keySet()) {
+                extras.keySet().forEach { key ->
                     val value = extras.get(key)
                     if (value != null) {
                         args[key] = value
@@ -44,7 +44,7 @@ class LaunchArgsModule(
         // 2. Also check the static MainActivity.launchArgs bundle for backward compatibility or if activity is not ready
         val staticBundle = MainActivity.launchArgs
         if (staticBundle != null) {
-             for (key in staticBundle.keySet()) {
+            staticBundle.keySet().forEach { key ->
                 val value = staticBundle.get(key)
                 if (value != null) {
                     args[key] = value
