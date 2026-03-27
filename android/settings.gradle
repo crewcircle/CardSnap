@@ -1,5 +1,5 @@
 rootProject.name = 'CardScannerApp'
 
-apply from: file("../node_modules/@react-native/gradle-plugin/settings.gradle")
+apply from: file("../node_modules/@react-native/gradle-plugin/settings.gradle.kts")
 
 include ':app'
