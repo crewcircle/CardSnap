@@ -1,0 +1,71 @@
+# Dependabot configuration for TypeScript/JavaScript projects
+# Template for: folio, CardScannerApp, crewcircle, rental-app
+
+version: 2
+
+updates:
+  # npm packages - Weekly check with grouping
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Sydney"
+    open-pull-requests-limit: 10
+    versioning-strategy: increase-if-necessary
+    labels:
+      - "dependencies"
+      - "npm"
+    reviewers:
+      - "Sensible-Analytics/engineering"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+    groups:
+      # Group production dependencies
+      production:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      # Group development dependencies
+      development:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      # Security updates (always separate)
+      security:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+        applies-to: security-updates
+    ignore:
+      # Ignore major updates initially (manual review required)
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions - Weekly check
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Sydney"
+    open-pull-requests-limit: 20
+    labels:
+      - "dependencies"
+      - "github-actions"
+    reviewers:
+      - "Sensible-Analytics/engineering"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    groups:
+      actions:
+        patterns:
+          - "*"
+    rebase-strategy: auto
