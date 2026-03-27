@@ -1,15 +1,5 @@
-pluginManagement {
-    repositories {
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-    }
-}
-
-plugins { id("org.gradle.toolchains.foojay-resolver-convention").version("0.5.0") }
-
 rootProject.name = 'CardScannerApp'
 
-includeBuild('../node_modules/@react-native/gradle-plugin')
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 
 include ':app'

@@ -33,24 +33,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate autolinking.json
-        run: |
-          mkdir -p android/build/generated/autolinking
-          node -e "
-            const fs = require('fs');
-            const autolinking = {
-              dependencies: {},
-              version: '0.84.1',
-              project: {
-                android: {
-                  packageName: 'com.cardscannerapp'
-                }
-              }
-            };
-            fs.writeFileSync('android/build/generated/autolinking/autolinking.json', JSON.stringify(autolinking, null, 2));
-            console.log('autolinking.json generated with empty dependencies');
-          "
-
       - name: Run linting
         run: npm run lint
 

@@ -81,19 +81,15 @@ describe("EditContactScreen", () => {
     render(<EditContactScreen {...createProps()} />);
 
     await waitFor(() => {
-      expect(screen.getByTestId("name-input")).toHaveProp("value", "Jane Doe");
-      expect(screen.getByTestId("email-input")).toHaveProp(
-        "value",
-        "jane@example.com"
-      );
-      expect(screen.getByTestId("phone-input")).toHaveProp(
-        "value",
-        "098-765-4321"
-      );
-      expect(screen.getByTestId("company-input")).toHaveProp(
-        "value",
-        "XYZ Corp"
-      );
+      const nameInput = screen.getByTestId("name-input");
+      const emailInput = screen.getByTestId("email-input");
+      const phoneInput = screen.getByTestId("phone-input");
+      const companyInput = screen.getByTestId("company-input");
+      
+      expect((nameInput as unknown as { props: { value: string } }).props.value).toBe("Jane Doe");
+      expect((emailInput as unknown as { props: { value: string } }).props.value).toBe("jane@example.com");
+      expect((phoneInput as unknown as { props: { value: string } }).props.value).toBe("098-765-4321");
+      expect((companyInput as unknown as { props: { value: string } }).props.value).toBe("XYZ Corp");
     });
   }, 10000);
 

@@ -100,7 +100,7 @@ jobs:
             -exportOptionsPlist ios/ExportOptions.plist \
             -exportPath build
           cp build/CardScannerApp.ipa CardScanner-${{ github.ref_name }}-ios.ipa
-          
+            
       - name: Upload iOS Release
         uses: actions/upload-release-asset@v1
         env:

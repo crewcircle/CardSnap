@@ -1,16 +1,15 @@
 // Jest setup file for consistent native module mocking
 
+const React = require("react");
+
 // Mock react-native with all basic components
 jest.mock("react-native", () => {
-  const React = require("react");
-
   const createMockComponent = (name) => {
     return React.forwardRef(({ children, ...props }, ref) => {
       return React.createElement(name, { ...props, ref }, children);
     });
   };
 
-  // FlatList needs special handling to render items
   const FlatList = React.forwardRef(({
     data,
     renderItem,
@@ -71,6 +70,7 @@ jest.mock("react-native", () => {
   });
 
   return {
+    React,
     View: createMockComponent("View"),
     Text: createMockComponent("Text"),
     TextInput: createMockComponent("TextInput"),
@@ -86,6 +86,7 @@ jest.mock("react-native", () => {
     SafeAreaView: createMockComponent("SafeAreaView"),
     StatusBar: createMockComponent("StatusBar"),
     Pressable: createMockComponent("Pressable"),
+    RefreshControl: createMockComponent("RefreshControl"),
     Platform: {
       OS: "ios",
       select: (obj) => obj.ios || obj.default,
@@ -124,14 +125,51 @@ jest.mock("react-native", () => {
   };
 });
 
+// Mock @react-navigation/native
+jest.mock("@react-navigation/native", () => {
+  return {
+    NavigationContainer: ({ children }) => children,
+    useNavigation: () => ({
+      navigate: jest.fn(),
+      goBack: jest.fn(),
+    }),
+    useFocusEffect: (callback) => {
+      React.useEffect(() => {
+        callback();
+      }, [callback]);
+    },
+    createNativeStackNavigator: () => ({
+      Navigator: ({ children }) => children,
+      Screen: ({ children }) => children,
+    }),
+  };
+});
+
+// Mock @react-navigation/bottom-tabs
+jest.mock("@react-navigation/bottom-tabs", () => ({
+  createBottomTabNavigator: () => ({
+    Navigator: ({ children }) => children,
+    Screen: ({ children }) => children,
+  }),
+}));
+
 // Mock react-native-vision-camera
 jest.mock("react-native-vision-camera", () => ({
-  Camera: jest.fn().mockImplementation(() => ({
-    takePicture: jest.fn().mockResolvedValue({ uri: "test-uri" }),
-    requestCameraPermission: jest.fn().mockResolvedValue("authorized"),
-    getAvailableCameraIds: jest.fn().mockResolvedValue(["back", "front"]),
+  Camera: React.forwardRef((props, ref) => {
+    React.useImperativeHandle(ref, () => ({
+      takePhoto: jest.fn().mockResolvedValue({ path: "/tmp/test-photo.jpg" }),
+    }));
+    return React.createElement("View", { testID: "mock-camera" });
+  }),
+  useCameraDevice: jest.fn(() => ({
+    id: "back-camera",
+    position: "back",
   })),
-
+  useCameraDevices: jest.fn(() => ({
+    back: { id: "back-camera", position: "back" },
+    front: { id: "front-camera", position: "front" },
+  })),
+  requestCameraPermission: jest.fn().mockResolvedValue("granted"),
   PermissionStatus: {
     UNDETERMINED: "undetermined",
     DENIED: "denied",
@@ -141,9 +179,13 @@ jest.mock("react-native-vision-camera", () => ({
 
 // Mock rn-mlkit-ocr
 jest.mock("rn-mlkit-ocr", () => ({
-  recognizeText: jest.fn().mockResolvedValue({
-    text: "John Doe\njohn.doe@example.com\n+1-555-123-4567\nAcme Inc.",
-  }),
+  __esModule: true,
+  default: {
+    recognizeText: jest.fn().mockResolvedValue({
+      text: "John Doe\njohn.doe@example.com\n+1-555-123-4567\nAcme Inc.",
+      blocks: [],
+    }),
+  },
 }));
 
 // Mock react-native-share
@@ -161,9 +203,7 @@ jest.mock("react-native-fs", () => ({
   unlink: jest.fn().mockResolvedValue(undefined),
   getFSInfo: jest.fn().mockResolvedValue({}),
   getAllExternalFilesDirs: jest.fn().mockResolvedValue([]),
-  getExternalStorageDirectory: jest
-    .fn()
-    .mockResolvedValue("/storage/emulated/0"),
+  getExternalStorageDirectory: jest.fn().mockResolvedValue("/storage/emulated/0"),
   getPictureURL: jest.fn().mockResolvedValue("file:///test.jpg"),
   moveFile: jest.fn().mockResolvedValue(undefined),
   copyFile: jest.fn().mockResolvedValue(undefined),

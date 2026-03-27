@@ -26,7 +26,6 @@ class LaunchArgsModule(
     private fun currentLaunchArgs(): Map<String, Any> {
         val args = mutableMapOf<String, Any>()
 
-        // 1. Try to get extras from the current activity's intent
         val activity = reactContext.currentActivity
         if (activity != null) {
             val intent = activity.intent
@@ -40,8 +39,7 @@ class LaunchArgsModule(
                 }
             }
         }
-
-        // 2. Also check the static MainActivity.launchArgs bundle for backward compatibility or if activity is not ready
+        
         val staticBundle = MainActivity.launchArgs
         if (staticBundle != null) {
             staticBundle.keySet().forEach { key ->
