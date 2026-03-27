@@ -32,16 +32,6 @@ target 'CardScannerApp' do
     # Pods for testing
   end
 
-  pre_install do |installer|
-    # Force RnMlkitOcr to build as static library to avoid bridging header issues
-    Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.5'
-      end
-    end
-  end
-
   post_install do |installer|
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
