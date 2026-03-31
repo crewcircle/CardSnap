@@ -61,7 +61,7 @@
     "react-native": "0.84.1",
     "react-native-fs": "^2.20.0",
     "react-native-screens": "^3.31.1",
-    "react-native-share": "^10.2.1",
+    "react-native-share": "^12.2.6",
     "react-native-vector-icons": "^10.1.0",
     "react-native-vision-camera": "^4.0.5",
     "rn-mlkit-ocr": "^0.3.1"
@@ -98,7 +98,7 @@
     "react-native-fs": "^2.20.0",
     "react-native-safe-area-context": "^5.7.0",
     "react-native-screens": "^3.31.1",
-    "react-native-share": "^10.2.1",
+    "react-native-share": "^12.2.6",
     "react-native-vector-icons": "^10.1.0",
     "react-native-vision-camera": "^4.0.5",
     "rn-mlkit-ocr": "^0.3.1"
