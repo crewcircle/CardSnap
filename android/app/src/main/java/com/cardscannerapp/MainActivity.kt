@@ -1,40 +1,32 @@
 package com.cardscannerapp
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import com.facebook.react.ReactActivity
-import com.facebook.react.ReactActivityDelegate
-import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
-import com.facebook.react.defaults.DefaultReactActivityDelegate
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import com.cardscannerapp.ui.theme.CardSnapTheme
 
-class MainActivity : ReactActivity() {
-  companion object {
-    var launchArgs: Bundle? = null
-  }
+class MainActivity : ComponentActivity() {
+    companion object { var pendingDeepLinkUri: String? = null }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    // Capture all extras, as Detox passes arguments as flattened extras
-    launchArgs = intent?.extras
-    super.onCreate(savedInstanceState)
-  }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        handleDeepLink(intent)
+        setContent { CardSnapTheme { AppNavigation() } }
+    }
 
-  override fun onNewIntent(intent: Intent?) {
-    super.onNewIntent(intent)
-    // Update launchArgs with new intent extras
-    launchArgs = intent?.extras
-    setIntent(intent) // Good practice to update the intent
-  }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleDeepLink(intent)
+    }
 
-  /**
-   * Returns the name of the main component registered from JavaScript. This is used to schedule
-   * rendering of the component.
-   */
-  override fun getMainComponentName(): String = "CardScannerApp"
-
-  /**
-   * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]
-   * which allows you to enable New Architecture with a single boolean flags [fabricEnabled]
-   */
-  override fun createReactActivityDelegate(): ReactActivityDelegate =
-      DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+    private fun handleDeepLink(intent: Intent?) {
+        val data: Uri? = intent?.data
+        if (data != null && data.scheme == "cardscanner" && data.host == "inject") {
+            pendingDeepLinkUri = data.getQueryParameter("imageUri")
+        }
+    }
 }
