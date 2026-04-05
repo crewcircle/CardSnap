@@ -20,7 +20,7 @@ fun AppNavigation() {
     NavHost(navController = navController, startDestination = "scan") {
         composable(
             route = "scan",
-            deepLinks = listOf(navDeepLink { uriPattern = "cardsnap://inject?imageUri={imageUri}" }),
+            deepLinks = listOf(navDeepLink { uriPattern = "cardscanner://inject?imageUri={imageUri}" }),
             arguments = listOf(navArgument("imageUri") { type = NavType.StringType; nullable = true; defaultValue = null })
         ) { backStackEntry ->
             val imageUri = backStackEntry.arguments?.getString("imageUri") ?: MainActivity.pendingDeepLinkUri

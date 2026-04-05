@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
 
     private fun handleDeepLink(intent: Intent?) {
         val data: Uri? = intent?.data
-        if (data != null && data.scheme == "cardsnap" && data.host == "inject") {
+        if (data != null && data.scheme == "cardscanner" && data.host == "inject") {
             pendingDeepLinkUri = data.getQueryParameter("imageUri")
         }
     }
