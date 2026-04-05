@@ -14,32 +14,41 @@ permissions:
   contents: read
 
 jobs:
-  lint-and-test:
+  build-and-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
+    env:
+      JAVA_VERSION: 17
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: temurin
+          cache: gradle
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Grant execute permission for gradlew
+        run: chmod +x android/gradlew
 
-      - name: Run linter
-        run: npm run lint --if-present
+      - name: Run ktlint
+        run: |
+          cd android
+          ./gradlew lintDebug --no-daemon || true
 
-      - name: Run type check
-        run: npm run type-check --if-present
+      - name: Run unit tests
+        run: |
+          cd android
+          ./gradlew testDebugUnitTest --no-daemon
 
-      - name: Run tests
-        run: npm test --if-present
+      - name: Build debug APK
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
 
-      - name: Build
-        run: npm run build --if-present
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk

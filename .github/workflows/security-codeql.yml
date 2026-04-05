@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main, master]
   schedule:
-    - cron: '0 0 * * 1'  # Run every Monday
+    - cron: '0 0 * * 1'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -24,10 +24,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ['javascript', 'python']
+        language: ['java-kotlin']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
@@ -35,8 +41,11 @@ jobs:
           languages: ${{ matrix.language }}
           queries: security-extended,security-and-quality
 
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
+      - name: Build
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
