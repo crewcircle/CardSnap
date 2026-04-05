@@ -89,17 +89,17 @@ jobs:
           
       - name: Build iOS Release
         run: |
-          xcodebuild -workspace ios/CardScannerApp.xcworkspace \
-            -scheme CardScannerApp \
+          xcodebuild -workspace ios/CardSnap.xcworkspace \
+            -scheme CardSnap \
             -configuration Release \
             -sdk iphoneos \
-            -archivePath CardScannerApp.xcarchive \
+            -archivePath CardSnap.xcarchive \
             archive
           xcodebuild -exportArchive \
-            -archivePath CardScannerApp.xcarchive \
+            -archivePath CardSnap.xcarchive \
             -exportOptionsPlist ios/ExportOptions.plist \
             -exportPath build
-          cp build/CardScannerApp.ipa CardScanner-${{ github.ref_name }}-ios.ipa
+          cp build/CardSnap.ipa CardScanner-${{ github.ref_name }}-ios.ipa
             
       - name: Upload iOS Release
         uses: actions/upload-release-asset@v1

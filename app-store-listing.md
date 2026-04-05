@@ -122,9 +122,9 @@ Coming soon:
 • Widget for quick scanning
 ```
 
-**Support URL**: https://github.com/Sensible-Analytics/CardScannerApp/issues  
-**Marketing URL**: https://github.com/Sensible-Analytics/CardScannerApp  
-**Privacy Policy URL**: https://github.com/Sensible-Analytics/CardScannerApp/blob/main/PRIVACY_POLICY.md  
+**Support URL**: https://github.com/Sensible-Analytics/CardSnap/issues  
+**Marketing URL**: https://github.com/Sensible-Analytics/CardSnap  
+**Privacy Policy URL**: https://github.com/Sensible-Analytics/CardSnap/blob/main/PRIVACY_POLICY.md  
 
 ### Google Play Store Metadata
 
@@ -154,8 +154,8 @@ Version 1.0.0 - Initial Release
 Scan business cards instantly with AI-powered OCR. Extract contacts automatically and manage your professional network. Complete privacy with on-device processing.
 ```
 
-**Privacy Policy URL**: https://github.com/Sensible-Analytics/CardScannerApp/blob/main/PRIVACY_POLICY.md  
-**Website**: https://github.com/Sensible-Analytics/CardScannerApp  
+**Privacy Policy URL**: https://github.com/Sensible-Analytics/CardSnap/blob/main/PRIVACY_POLICY.md  
+**Website**: https://github.com/Sensible-Analytics/CardSnap  
 **Email**: support@yourcompany.com  
 
 ---
@@ -363,7 +363,7 @@ Scan business cards instantly with AI-powered OCR. Extract contacts automaticall
 
 - **GitHub Issues**: Primary support channel
 - **Email**: support@yourcompany.com (optional)
-- **Social Media**: Twitter @CardScannerApp (optional)
+- **Social Media**: Twitter @CardSnap (optional)
 
 ### Common Issues to Prepare For
 
@@ -498,7 +498,7 @@ Must include:
 **Email**: contact@yourcompany.com  
 **Website**: https://yourcompany.com  
 **Support**: GitHub Issues  
-**Twitter**: @CardScannerApp  
+**Twitter**: @CardSnap  
 
 ---
 
