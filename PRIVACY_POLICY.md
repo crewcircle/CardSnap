@@ -10,11 +10,9 @@ CardSnap ("we", "our", or "us") is committed to protecting your privacy. This Pr
 
 ### Information You Provide
 - **Scanned Contact Data**: When you scan a business card, the extracted contact information is stored locally on your device.
-- **Account Information**: If you choose to sync contacts, we may collect minimal account data.
 
 ### Information Collected Automatically
 - **Device Information**: We collect basic device information (Android version, device model) for crash reporting.
-- **Usage Data**: We may collect anonymous usage statistics to improve the app.
 
 ### Camera Access
 - CardSnap requires camera access to scan business cards.
@@ -26,7 +24,6 @@ CardSnap ("we", "our", or "us") is committed to protecting your privacy. This Pr
 We use the information we collect to:
 - Provide, maintain, and improve the CardSnap app
 - Process and save scanned business card data to your device
-- Respond to your comments and questions
 
 ## Data Storage
 
@@ -54,14 +51,6 @@ You have the right to:
 - Access your stored data (all data is stored locally on your device)
 - Delete your stored data (Settings > Reset All Data)
 - Revoke camera or contacts permissions at any time through device settings
-
-## Children's Privacy
-
-CardSnap does not knowingly collect personal information from children under 13.
-
-## Changes to This Policy
-
-We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.
 
 ## Contact Us
 
