@@ -1,0 +1,52 @@
+%% CardScannerApp — C4 System Context Diagram
+%% Render with: mmdc -i system-context.mmd -o system-context.png
+%% Requires: @mermaid-js/mermaid-cli (npm i -g @mermaid-js/mermaid-cli)
+
+%% ──────────────────────────────────────────────────────────────
+%% C4 Level 1: System Context
+%% Shows CardScannerApp and its relationships with external systems
+%% ──────────────────────────────────────────────────────────────
+
+graph TB
+    subgraph User
+        A[👤 User<br/>Business Professional]
+    end
+
+    subgraph CardScannerApp["📱 CardScannerApp<br/>Business Card Scanner"]
+        B[Scan Screen<br/>Camera + Document Detection]
+        C[Review Screen<br/>Editable OCR Results]
+        D[Save Screen<br/>Contact Save + vCard Export]
+    end
+
+    subgraph External_Systems
+        E[(📇 OS Contacts<br/>iOS Contacts / Android Contacts)]
+        F[📤 Share Sheet<br/>iOS Share / Android Intent]
+        G[📁 File System<br/>Local Image Storage]
+    end
+
+    subgraph On_Device_AI
+        H[🔍 Google ML Kit<br/>On-Device OCR]
+        I[📄 Document Scanner<br/>CameraX iOS: VisionKit / Android: CameraX]
+    end
+
+    A -->|1. Opens app & scans card| B
+    B -->|2. Captures image| I
+    I -->|3. Returns cropped card image| B
+    B -->|4. Sends image for OCR| H
+    H -->|5. Returns raw text| B
+    B -->|6. Parses fields via BCR Library| C
+    C -->|7. User reviews & edits fields| C
+    C -->|8. Navigates to save| D
+    D -->|9a. Saves to contacts| E
+    D -->|9b. Exports as vCard| F
+    D -->|9c. Stores card image| G
+
+    classDef user fill:#08427B,stroke:#05305E,color:#fff
+    classDef app fill:#1168BD,stroke:#0B4884,color:#fff
+    classDef external fill:#999999,stroke:#666666,color:#fff
+    classDef ai fill:#4C8F44,stroke:#3A6E34,color:#fff
+
+    class A user
+    class B,C,D app
+    class E,F,G external
+    class H,I ai
