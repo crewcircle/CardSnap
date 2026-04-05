@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardSnap - Business Card Scanner</title>
+    <meta name="description" content="CardSnap is a professional business card scanner built with native Kotlin and Jetpack Compose. Scan, extract, and save contacts instantly using ML Kit OCR.">
+    <meta name="keywords" content="business card scanner, OCR, contact manager, Kotlin, Android, ML Kit">
+    <meta property="og:title" content="CardSnap - Business Card Scanner">
+    <meta property="og:description" content="Scan business cards instantly. Extract contacts automatically. Save to your phone in seconds.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sensible-analytics.github.io/CardSnap/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066FF;
+            --primary-dark: #003DB3;
+            --primary-light: #E6F0FF;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --surface: #FFFFFF;
+            --surface-alt: #F5F7FA;
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Header */
+        header { background: var(--surface); border-bottom: 1px solid #E5E7EB; padding: 16px 0; position: sticky; top: 0; z-index: 100; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--text); }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--primary); }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 12px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary-light); }
+
+        /* Hero */
+        .hero { padding: 100px 0 80px; text-align: center; background: linear-gradient(180deg, var(--primary-light) 0%, var(--surface) 100%); }
+        .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+        .hero h1 span { color: var(--primary); }
+        .hero p { font-size: 20px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px; }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .hero-image { margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
+        .hero-image img { width: 100%; display: block; }
+
+        /* Features */
+        .features { padding: 100px 0; background: var(--surface); }
+        .section-title { text-align: center; margin-bottom: 64px; }
+        .section-title h2 { font-size: 40px; font-weight: 800; margin-bottom: 16px; }
+        .section-title p { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+        .feature-card { background: var(--surface-alt); border-radius: 16px; padding: 32px; transition: transform 0.2s, box-shadow 0.2s; }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+        .feature-icon { font-size: 32px; margin-bottom: 16px; }
+        .feature-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { color: var(--text-secondary); font-size: 15px; }
+
+        /* How it works */
+        .how-it-works { padding: 100px 0; background: var(--surface-alt); }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+        .step { text-align: center; }
+        .step-number { width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; margin: 0 auto 20px; }
+        .step h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .step p { color: var(--text-secondary); font-size: 15px; }
+
+        /* Use cases */
+        .use-cases { padding: 100px 0; background: var(--surface); }
+        .use-cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+        .use-case { background: var(--surface-alt); border-radius: 12px; padding: 24px; text-align: center; }
+        .use-case-icon { font-size: 36px; margin-bottom: 12px; }
+        .use-case h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .use-case p { color: var(--text-secondary); font-size: 14px; }
+
+        /* Download */
+        .download { padding: 100px 0; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; text-align: center; }
+        .download h2 { font-size: 40px; font-weight: 800; margin-bottom: 16px; }
+        .download p { font-size: 18px; opacity: 0.9; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .download-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .download-btn { display: inline-flex; align-items: center; gap: 12px; padding: 16px 32px; border-radius: 12px; background: white; color: var(--primary); font-weight: 700; text-decoration: none; transition: transform 0.2s; }
+        .download-btn:hover { transform: translateY(-2px); }
+        .download-btn svg { width: 24px; height: 24px; }
+
+        /* Tech stack */
+        .tech-stack { padding: 80px 0; background: var(--surface-alt); }
+        .tech-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+        .tech-badge { background: var(--surface); border: 1px solid #E5E7EB; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 500; }
+
+        /* Footer */
+        footer { background: var(--text); color: white; padding: 40px 0; text-align: center; }
+        footer a { color: var(--primary); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        footer p { opacity: 0.7; margin-top: 8px; font-size: 14px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 16px; }
+            .section-title h2 { font-size: 28px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Card<span>Snap</span></a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="https://github.com/Sensible-Analytics/CardSnap" target="_blank">GitHub</a>
+                <a href="#download" class="btn btn-primary">Download</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Scan Business Cards<br><span>in a Snap</span></h1>
+            <p>Point your camera, capture the card, and save the contact — all in seconds. Powered by Google ML Kit OCR and built with native Kotlin.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    Download APK
+                </a>
+                <a href="https://github.com/Sensible-Analytics/CardSnap" class="btn btn-outline" target="_blank">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    View Source
+                </a>
+            </div>
+            <div class="hero-image">
+                <img src="images/screenshots/scan-screen.svg" alt="CardSnap Scan Screen" style="background: var(--surface-alt);">
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Features</h2>
+                <p>Everything you need to digitize your business card collection</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Instant Scanning</h3>
+                    <p>Point your camera at any business card and capture with a single tap. Built-in guide frame ensures perfect alignment.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Smart OCR</h3>
+                    <p>Google ML Kit Text Recognition extracts all text with high accuracy, even from challenging card designs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Intelligent Parsing</h3>
+                    <p>Automatically identifies names, emails, phones, companies, job titles, and websites from raw OCR text.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Auto-Save</h3>
+                    <p>Optionally save contacts automatically after each scan. Never lose a contact again.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📤</div>
+                    <h3>Export & Share</h3>
+                    <p>Export contacts as vCard or CSV. Share via email, messaging apps, or any other app on your device.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Multi-Language</h3>
+                    <p>Support for English, Chinese, German, French, Spanish, Japanese, Korean, and more OCR languages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Three simple steps to digitize any business card</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Point & Capture</h3>
+                    <p>Open the app and point your camera at a business card. Align it within the guide frame and tap capture.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Automatic OCR</h3>
+                    <p>The image is processed by ML Kit's Text Recognition engine. Our parser intelligently extracts contact details.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Review & Save</h3>
+                    <p>Review the extracted details, edit any fields if needed, then save to your device or export as vCard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases" id="use-cases">
+        <div class="container">
+            <div class="section-title">
+                <h2>Use Cases</h2>
+                <p>Perfect for anyone who collects business cards</p>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <div class="use-case-icon">🎪</div>
+                    <h4>Networking Events</h4>
+                    <p>Scan dozens of cards at conferences and meetups</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">💼</div>
+                    <h4>Sales Teams</h4>
+                    <p>Capture prospect info during field visits</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">👥</div>
+                    <h4>Recruiters</h4>
+                    <p>Save candidate details from career fairs</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🏠</div>
+                    <h4>Real Estate</h4>
+                    <p>Collect agent and client contact info</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🏡</div>
+                    <h4>Personal Use</h4>
+                    <p>Digitize your stack of physical cards at home</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download" id="download">
+        <div class="container">
+            <h2>Download CardSnap</h2>
+            <p>Get the latest version and start scanning business cards in seconds</p>
+            <div class="download-buttons">
+                <a href="https://github.com/Sensible-Analytics/CardSnap/releases/latest" class="download-btn" target="_blank">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    <div>
+                        <div style="font-size: 12px; opacity: 0.7;">Download for</div>
+                        <div style="font-size: 18px;">Android</div>
+                    </div>
+                </a>
+                <a href="https://github.com/Sensible-Analytics/CardSnap" class="download-btn" target="_blank">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <div>
+                        <div style="font-size: 12px; opacity: 0.7;">View on</div>
+                        <div style="font-size: 18px;">GitHub</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-stack">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="font-size: 24px;">Built With</h2>
+            </div>
+            <div class="tech-grid">
+                <span class="tech-badge">Kotlin 1.9.22</span>
+                <span class="tech-badge">Jetpack Compose</span>
+                <span class="tech-badge">Material 3</span>
+                <span class="tech-badge">CameraX</span>
+                <span class="tech-badge">ML Kit OCR</span>
+                <span class="tech-badge">Room Database</span>
+                <span class="tech-badge">DataStore</span>
+                <span class="tech-badge">Coroutines</span>
+                <span class="tech-badge">Coil</span>
+                <span class="tech-badge">MVVM</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="logo" style="color: white; font-size: 24px; font-weight: 800; text-decoration: none;">Card<span style="color: #60A5FA;">Snap</span></a>
+            <p>Built with ❤️ by <a href="https://github.com/Sensible-Analytics" target="_blank">Sensible Analytics</a></p>
+            <p style="margin-top: 16px;">
+                <a href="https://github.com/Sensible-Analytics/CardSnap" target="_blank">GitHub</a> · 
+                <a href="https://github.com/Sensible-Analytics/CardSnap/issues" target="_blank">Issues</a> · 
+                <a href="https://github.com/Sensible-Analytics/CardSnap/blob/main/LICENSE" target="_blank">License</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

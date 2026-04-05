@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#F5F7FA"/>
+  <rect x="0" y="0" width="360" height="88" fill="#0066FF"/>
+  <text x="48" y="56" fill="white" font-family="Inter,sans-serif" font-size="20" font-weight="700">← Review Contact</text>
+  <rect x="20" y="108" width="320" height="160" rx="12" fill="white"/>
+  <rect x="36" y="124" width="288" height="128" rx="8" fill="#E6F0FF"/>
+  <text x="180" y="194" text-anchor="middle" fill="#0066FF" font-family="Inter,sans-serif" font-size="14">📸 Captured Card Image</text>
+  <rect x="20" y="288" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="320" fill="#6B7280" font-family="Inter,sans-serif" font-size="12">Name</text>
+  <text x="36" y="336" fill="#111827" font-family="Inter,sans-serif" font-size="16" font-weight="500">John Smith</text>
+  <rect x="20" y="348" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="380" fill="#6B7280" font-family="Inter,sans-serif" font-size="12">Email</text>
+  <text x="36" y="396" fill="#111827" font-family="Inter,sans-serif" font-size="16" font-weight="500">john@techcorp.com</text>
+  <rect x="20" y="408" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="440" fill="#6B7280" font-family="Inter,sans-serif" font-size="12">Phone</text>
+  <text x="36" y="456" fill="#111827" font-family="Inter,sans-serif" font-size="16" font-weight="500">+1 555-987-6543</text>
+  <rect x="20" y="468" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="500" fill="#6B7280" font-family="Inter,sans-serif" font-size="12">Company</text>
+  <text x="36" y="516" fill="#111827" font-family="Inter,sans-serif" font-size="16" font-weight="500">TechCorp LLC</text>
+  <rect x="20" y="580" width="150" height="48" rx="12" fill="white" stroke="#0066FF" stroke-width="2"/>
+  <text x="95" y="610" text-anchor="middle" fill="#0066FF" font-family="Inter,sans-serif" font-size="14" font-weight="600">↻ Retake</text>
+  <rect x="190" y="580" width="150" height="48" rx="12" fill="#0066FF"/>
+  <text x="265" y="610" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="14" font-weight="600">💾 Save</text>
+</svg>

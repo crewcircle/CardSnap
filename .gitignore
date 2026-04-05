@@ -85,6 +85,10 @@ Pods/
 .vscode/
 Gemfile
 Gemfile.lock
+!docs/index.html
+!docs/images/screenshots/
+!docs/index.html
+!docs/images/screenshots/
 docs/
 fastlane/
 scripts/

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="720" viewBox="0 0 360 720">
+  <rect width="360" height="720" fill="#F5F7FA"/>
+  <rect x="0" y="0" width="360" height="88" fill="#0066FF"/>
+  <text x="48" y="56" fill="white" font-family="Inter,sans-serif" font-size="20" font-weight="700">← Settings</text>
+  <text x="20" y="128" fill="#111827" font-family="Inter,sans-serif" font-size="16" font-weight="700">Scanner</text>
+  <rect x="20" y="140" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="172" fill="#111827" font-family="Inter,sans-serif" font-size="15">OCR Languages</text>
+  <text x="300" y="172" text-anchor="end" fill="#6B7280" font-family="Inter,sans-serif" font-size="14">eng</text>
+  <rect x="20" y="200" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="232" fill="#111827" font-family="Inter,sans-serif" font-size="15">Auto-save contacts</text>
+  <rect x="280" y="216" width="44" height="24" rx="12" fill="#E5E7EB"/>
+  <rect x="284" y="220" width="16" height="16" rx="8" fill="white"/>
+  <rect x="20" y="260" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="292" fill="#111827" font-family="Inter,sans-serif" font-size="15">Notifications</text>
+  <rect x="280" y="276" width="44" height="24" rx="12" fill="#0066FF"/>
+  <rect x="304" y="280" width="16" height="16" rx="8" fill="white"/>
+  <rect x="20" y="320" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="352" fill="#111827" font-family="Inter,sans-serif" font-size="15">Haptic feedback</text>
+  <rect x="280" y="336" width="44" height="24" rx="12" fill="#0066FF"/>
+  <rect x="304" y="340" width="16" height="16" rx="8" fill="white"/>
+  <rect x="20" y="380" width="320" height="52" rx="8" fill="white"/>
+  <text x="36" y="412" fill="#111827" font-family="Inter,sans-serif" font-size="15">Data usage</text>
+  <text x="300" y="412" text-anchor="end" fill="#6B7280" font-family="Inter,sans-serif" font-size="14">Wi-Fi only</text>
+  <rect x="20" y="500" width="320" height="48" rx="12" fill="#EF4444"/>
+  <text x="180" y="530" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="15" font-weight="600">🗑 Reset All Data</text>
+</svg>
