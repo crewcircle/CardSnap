@@ -1,4 +1,4 @@
-# CardScannerApp - Agent Guidelines
+# CardSnap - Agent Guidelines
 
 This file provides instructions for AI agents operating in this repository. It covers project setup, development workflows, code style, and best practices.
 
@@ -13,7 +13,7 @@ This file provides instructions for AI agents operating in this repository. It c
 
 ## 📋 Project Overview
 
-CardScannerApp (CardSnap) is a **native Kotlin Android application** for scanning business cards using OCR technology.
+CardSnap (CardSnap) is a **native Kotlin Android application** for scanning business cards using OCR technology.
 
 ### Tech Stack
 - **Kotlin 1.9.22** with Coroutines + Flow
@@ -58,7 +58,7 @@ cd android
 ## 📁 Project Structure
 
 ```
-CardScannerApp/
+CardSnap/
 ├── android/
 │   ├── app/
 │   │   ├── src/

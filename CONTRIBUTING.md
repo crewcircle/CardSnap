@@ -1,6 +1,6 @@
-# Contributing to CardScannerApp
+# Contributing to CardSnap
 
-Thank you for considering contributing to CardScannerApp! Please read this guide to understand our development process and how you can contribute effectively.
+Thank you for considering contributing to CardSnap! Please read this guide to understand our development process and how you can contribute effectively.
 
 ## How to Contribute
 
@@ -41,8 +41,8 @@ Thank you for considering contributing to CardScannerApp! Please read this guide
 ### Installation
 
 ```bash
-git clone https://github.com/Sensible-Analytics/CardScannerApp.git
-cd CardScannerApp
+git clone https://github.com/Sensible-Analytics/CardSnap.git
+cd CardSnap
 npm install
 cd ios && pod install && cd ..
 ```
@@ -188,4 +188,4 @@ If you need help:
 - Refer to the documentation in /docs
 - As a last resort, open a new issue
 
-Thank you for contributing to CardScannerApp!
+Thank you for contributing to CardSnap!

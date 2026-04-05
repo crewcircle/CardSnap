@@ -1,7 +1,7 @@
 {
-  "name": "cardscanner",
+  "name": "cardsnap",
   "version": "2.0.0",
-  "description": "A professional business card scanner application built with native Kotlin and Jetpack Compose, featuring OCR-powered text extraction and intelligent contact parsing",
+  "description": "CardSnap - A professional business card scanner application built with native Kotlin and Jetpack Compose, featuring OCR-powered text extraction and intelligent contact parsing",
   "private": true,
   "repository": {
     "type": "git",

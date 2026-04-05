@@ -7,7 +7,7 @@
 **Scan cards instantly with your phone camera**
 
 [![📱 Download App](https://img.shields.io/badge/Download_App-00C7B7?style=for-the-badge&logo=appstore&logoColor=white)]()
-[![💻 View Code](https://img.shields.io/badge/View_Code-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sensible-Analytics/CardScannerApp)
+[![💻 View Code](https://img.shields.io/badge/View_Code-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sensible-Analytics/CardSnap)
 
 </div>
 
@@ -77,8 +77,8 @@ Automatically finds:
 
 ```bash
 # Clone
-git clone https://github.com/Sensible-Analytics/CardScannerApp.git
-cd CardScannerApp
+git clone https://github.com/Sensible-Analytics/CardSnap.git
+cd CardSnap
 
 # Install
 npm install
@@ -175,7 +175,7 @@ Want to customize it? Add features? It's all open:
 
 ```bash
 # Clone
-git clone https://github.com/Sensible-Analytics/CardScannerApp.git
+git clone https://github.com/Sensible-Analytics/CardSnap.git
 
 # Install dependencies
 npm install
@@ -228,6 +228,6 @@ Want custom mobile apps for your business? [Let's talk](mailto:hello@sensibleana
 
 **Stop typing business cards.**
 
-[📱 Get The App]() · [💻 View Code](https://github.com/Sensible-Analytics/CardScannerApp) · [⭐ Star on GitHub](https://github.com/Sensible-Analytics/CardScannerApp)
+[📱 Get The App]() · [💻 View Code](https://github.com/Sensible-Analytics/CardSnap) · [⭐ Star on GitHub](https://github.com/Sensible-Analytics/CardSnap)
 
 </div>

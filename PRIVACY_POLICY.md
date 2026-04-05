@@ -1,16 +1,16 @@
-# Privacy Policy for CardScannerApp
+# Privacy Policy for CardSnap
 
 **Last Updated: March 2026**
 
 ## Overview
 
-CardScannerApp is designed with privacy as a core principle. This document explains how we handle your data.
+CardSnap is designed with privacy as a core principle. This document explains how we handle your data.
 
 ## Data Collection and Processing
 
 ### Camera Access
 
-CardScannerApp requires camera access to scan business cards. When you use the scan feature:
+CardSnap requires camera access to scan business cards. When you use the scan feature:
 
 - The camera captures an image of the business card
 - OCR (Optical Character Recognition) processes the image **on your device**
@@ -86,7 +86,7 @@ Export your contacts in standard formats:
 
 ## Children's Privacy
 
-CardScannerApp is not intended for use by children under the age of 13. We do not knowingly collect information from children under 13.
+CardSnap is not intended for use by children under the age of 13. We do not knowingly collect information from children under 13.
 
 ## International Compliance
 
@@ -148,7 +148,7 @@ This app complies with Google Play's Data Safety requirements:
 
 ## Summary
 
-CardScannerApp is a privacy-focused application:
+CardSnap is a privacy-focused application:
 
 - ✅ All processing happens on your device
 - ✅ No data is sent to servers
