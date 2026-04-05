@@ -1,233 +1,185 @@
-<div align="center">
+# CardSnap
 
-# 📱 CardScanner
+[![CI](https://github.com/Sensible-Analytics/CardSnap/actions/workflows/ci.yml/badge.svg)](https://github.com/Sensible-Analytics/CardSnap/actions/workflows/ci.yml)
+[![Android Build](https://github.com/Sensible-Analytics/CardSnap/actions/workflows/android-build.yml/badge.svg)](https://github.com/Sensible-Analytics/CardSnap/actions/workflows/android-build.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg)](https://kotlinlang.org)
+[![Min SDK](https://img.shields.io/badge/Min%20SDK-26-green.svg)](https://developer.android.com/distribute/best-practices/develop/target-sdk)
 
-### **Never Type a Business Card Again**
+> **Scan business cards instantly. Extract contacts automatically. Save to your phone in seconds.**
 
-**Scan cards instantly with your phone camera**
-
-[![📱 Download App](https://img.shields.io/badge/Download_App-00C7B7?style=for-the-badge&logo=appstore&logoColor=white)]()
-[![💻 View Code](https://img.shields.io/badge/View_Code-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Sensible-Analytics/CardSnap)
-
-</div>
-
----
-
-## 😤 Still Manually Typing Business Cards?
-
-You come back from a conference with 50 business cards. Now what?
-- ❌ Spend 3 hours typing them into your phone
-- ❌ Take photos and forget about them
-- ❌ Lose the cards before you do anything
-- ❌ Try some expensive app that doesn't work
-
-**There's a better way.**
+CardSnap is a professional business card scanner built with **native Kotlin** and **Jetpack Compose**. It uses Google's ML Kit for OCR to extract contact details from business card photos, then intelligently parses and saves them to your device contacts.
 
 ---
 
-## ✨ What CardScanner Does
+## 📱 Screenshots
 
-### 📷 **Point, Scan, Done**
-- Hold card in front of camera
-- Automatic edge detection
-- OCR reads text instantly
-- Saves in 2 seconds
-
-**Faster than you can type.**
-
-### 🧠 **Smart Contact Extraction**
-Automatically finds:
-- Name (first & last)
-- Phone numbers (mobile, office)
-- Email addresses
-- Company name
-- Job title
-- Website
-- Address
-
-**No manual editing needed.**
-
-### 💾 **Your Data, Your Phone**
-- Stores locally (no cloud)
-- Works offline
-- Export as vCard
-- Share via any app
-
-**Privacy first. Always.**
-
-### 📤 **Export Anywhere**
-- Save to phone contacts
-- Export as vCard file
-- Share via email/WhatsApp
-- Upload to CRM
-
-**Your contacts, wherever you want them.**
+| Scan Screen | Review Contact | Contacts List | Settings |
+|:---:|:---:|:---:|:---:|
+| ![Scan Screen](docs/images/screenshots/scan-screen.png) | ![Review](docs/images/screenshots/review-contact.png) | ![Contacts](docs/images/screenshots/contacts-list.png) | ![Settings](docs/images/screenshots/settings.png) |
 
 ---
 
-## 🚀 Get The App
+## ✨ Features
 
-**iOS and Android. Free to use.**
+- **📸 Instant Scanning** — Point your camera at any business card and capture with a single tap
+- **🤖 Smart OCR** — Google ML Kit Text Recognition extracts all text with high accuracy
+- **🧠 Intelligent Parsing** — Automatically identifies names, emails, phones, companies, and websites
+- **💾 Auto-Save** — Optionally save contacts automatically after each scan
+- **📤 Export & Share** — Export contacts as vCard or CSV, share via any app
+- **🌐 Multi-Language OCR** — Support for English, Chinese, German, French, Spanish, and more
+- **📱 Native Android** — Built with Jetpack Compose, CameraX, and Material 3 design
+- **🔒 Privacy-First** — All processing happens on-device. No data sent to servers
 
-👉 **Download from App Store or Google Play**
+---
 
-*(Coming soon to stores — currently in beta)*
+## 🏗️ Architecture
 
-**Or build it yourself:**
+CardSnap follows the **MVVM architecture** with clean separation of concerns:
+
+```
+┌─────────────────────────────────────────────────┐
+│                  UI Layer                        │
+│  ScanScreen → ContactsScreen → EditContactScreen │
+│  SettingsScreen (Jetpack Compose)                │
+├─────────────────────────────────────────────────┤
+│                ViewModel Layer                   │
+│  ScanViewModel, ContactsViewModel, etc.          │
+│  (StateFlow + Coroutines)                        │
+├─────────────────────────────────────────────────┤
+│                Domain Layer                      │
+│  ContactParser, OcrEngine, ImageCropper          │
+├─────────────────────────────────────────────────┤
+│                 Data Layer                       │
+│  Room Database ←→ ContactRepository             │
+│  DataStore Preferences ←→ SettingsRepository     │
+└─────────────────────────────────────────────────┘
+```
+
+### Tech Stack
+
+| Component | Technology |
+|-----------|-----------|
+| **Language** | Kotlin 1.9.22 |
+| **UI** | Jetpack Compose + Material 3 |
+| **Camera** | CameraX |
+| **OCR** | Google ML Kit Text Recognition |
+| **Database** | Room |
+| **Settings** | DataStore Preferences |
+| **Async** | Kotlin Coroutines + Flow |
+| **Image Loading** | Coil |
+| **Architecture** | MVVM + Repository Pattern |
+
+---
+
+## 📥 Download
+
+| Version | Type | Link |
+|---------|------|------|
+| Latest Debug APK | Debug | [Download from Releases](https://github.com/Sensible-Analytics/CardSnap/releases) |
+| Latest Release APK | Release | [Download from Releases](https://github.com/Sensible-Analytics/CardSnap/releases) |
+
+---
+
+## 🚀 How It Works
+
+### 1. Point & Capture
+Open the app and point your camera at a business card. The card guide frame helps you align the card properly.
+
+### 2. Automatic OCR
+When you tap capture, the image is cropped, rotated (if needed), and processed by ML Kit's Text Recognition engine.
+
+### 3. Smart Parsing
+The extracted text is analyzed by our contact parser, which uses regex patterns to identify:
+- **Names** — First line without digits or @ symbols
+- **Emails** — Standard email format detection
+- **Phone numbers** — US/international format recognition
+- **Companies** — Detection of business suffixes (Inc, LLC, Corp, etc.)
+- **Job titles** — Keyword-based title identification
+- **Websites** — URL pattern detection
+
+### 4. Review & Save
+Review the extracted contact details, edit any fields if needed, then save to your device database or export as vCard.
+
+---
+
+## 🎯 Use Cases
+
+| Use Case | Description |
+|----------|-------------|
+| **Networking Events** | Quickly scan dozens of business cards at conferences and meetups |
+| **Sales Teams** | Capture prospect contact info during field visits |
+| **Recruiters** | Save candidate contact details from career fairs |
+| **Real Estate** | Collect agent and client contact information efficiently |
+| **Personal Use** | Digitize your stack of physical business cards at home |
+
+---
+
+## 🛠️ Build from Source
+
+### Prerequisites
+- **Java 17** (Temurin recommended)
+- **Android SDK** (compileSdk 35, minSdk 26)
+- **Gradle 8.8**
+
+### Commands
 
 ```bash
-# Clone
+# Clone the repository
 git clone https://github.com/Sensible-Analytics/CardSnap.git
 cd CardSnap
 
-# Install
-npm install
+# Build debug APK
+cd android
+./gradlew assembleDebug
 
-# iOS
-cd ios && pod install && cd ..
-npm run ios
+# Build release APK
+./gradlew assembleRelease
 
-# Android
-npm run android
+# Run unit tests
+./gradlew testDebugUnitTest
+
+# Run E2E tests (requires emulator)
+./gradlew connectedAndroidTest
 ```
 
----
-
-## 💡 Perfect For
-
-**Conference Goers**
-> "Collect 100 cards at a trade show. Scan them all on the flight home."
-
-**Sales Professionals**
-> "Network at events. Follow up the same day with accurate contact info."
-
-**Small Business Owners**
-> "Keep track of vendors, partners, and potential clients."
-
-**Job Seekers**
-> "Collect recruiter contacts at career fairs. Never lose an opportunity."
+### Output
+- Debug APK: `android/app/build/outputs/apk/debug/app-debug.apk`
+- Release APK: `android/app/build/outputs/apk/release/app-release-unsigned.apk`
 
 ---
 
-## 🎯 Why This Works Better
+## 📋 Requirements
 
-| Other Apps | CardScanner |
-|------------|-------------|
-| Expensive subscriptions | **Free** |
-| Uploads to their cloud | **Stays on your phone** |
-| Requires internet | **Works offline** |
-| Privacy policy nightmares | **No data collection** |
-| Shows ads | **No ads** |
-
-**Simple. Private. Free.**
+| Requirement | Value |
+|------------|-------|
+| **Minimum Android** | 8.0 (API 26) |
+| **Target Android** | 14.0 (API 34) |
+| **Compile SDK** | 35 |
+| **Camera** | Required |
+| **Permissions** | Camera, Contacts, Internet, Vibrate |
 
 ---
 
-## 🛠️ How It Works
+## 📄 License
 
-**The Tech:**
-- React Native (iOS + Android)
-- Google ML Kit (OCR)
-- Vision Camera (fast capture)
-- On-device processing (privacy)
-
-**The Process:**
-1. Point camera at card
-2. App detects edges automatically
-3. OCR extracts text
-4. AI parses into contact fields
-5. Save to contacts or share
-
-**That's it.**
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 💬 What Users Say
+## 🤝 Contributing
 
-**Sales Director, Sydney:**
-> "Used to have a pile of cards on my desk for months. Now they're in my phone before I leave the event."
-
-**Startup Founder, Melbourne:**
-> "Met 200 people at a conference. Had all their contacts organized by the time I got home."
-
-**Consultant, Brisbane:**
-> "Privacy was my concern. This doesn't upload anything. Perfect."
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ---
 
-## 🔒 Privacy First
+## 📞 Support
 
-**We take privacy seriously:**
-
-- ✅ **No cloud storage** — Everything stays on your device
-- ✅ **No internet required** — Works completely offline
-- ✅ **No analytics** — We don't track usage
-- ✅ **No accounts** — No login, no password, no nonsense
-- ✅ **Open source** — See exactly what the code does
-
-**Your cards. Your phone. Period.**
+- **Issues**: [GitHub Issues](https://github.com/Sensible-Analytics/CardSnap/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Sensible-Analytics/CardSnap/discussions)
 
 ---
 
-## 🛠️ For Developers
-
-Want to customize it? Add features? It's all open:
-
-```bash
-# Clone
-git clone https://github.com/Sensible-Analytics/CardSnap.git
-
-# Install dependencies
-npm install
-
-# Run on iOS
-npm run ios
-
-# Run on Android
-npm run android
-```
-
-**Built with:**
-- React Native
-- TypeScript
-- Google ML Kit
-- Expo
-
----
-
-## ⚠️ Limitations
-
-**Honest talk:**
-
-- OCR works best on clean, standard business cards
-- Fancy designs with weird fonts might not scan perfectly
-- Very dark backgrounds can be tricky
-- You'll occasionally need to correct a field
-
-**But it's still way faster than typing.**
-
----
-
-## 🔒 Security
-
-This repo uses automated secret scanning.
-
-See [SECURITY.md](SECURITY.md) for details.
-
----
-
-## 🤝 Built By
-
-**[Sensible Analytics](https://www.sensibleanalytics.co)** — Tools that respect your privacy
-
-Want custom mobile apps for your business? [Let's talk](mailto:hello@sensibleanalytics.co).
-
----
-
-<div align="center">
-
-**Stop typing business cards.**
-
-[📱 Get The App]() · [💻 View Code](https://github.com/Sensible-Analytics/CardSnap) · [⭐ Star on GitHub](https://github.com/Sensible-Analytics/CardSnap)
-
-</div>
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/Sensible-Analytics">Sensible Analytics</a>
+</p>
