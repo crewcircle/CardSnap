@@ -1,88 +1,139 @@
-# Agent Instructions - Branch Protection Workflow
+# CardScannerApp - Agent Guidelines
 
-## ⚠️ IMPORTANT: This repository has branch protection enabled
+This file provides instructions for AI agents operating in this repository. It covers project setup, development workflows, code style, and best practices.
 
-Direct pushes to `main`/`master` are **BLOCKED**. All changes must go through Pull Requests.
+## 🔴 CRITICAL: Sensible Analytics Workflow
 
-## Required Workflow
+- ❌ NEVER push to main/master
+- ❌ NEVER commit directly
+- ✅ ALWAYS create feature branch (`feat/`, `fix/`, `refactor/`, `docs/`)
+- ✅ ALWAYS use PR workflow
+- ✅ Target PR size: < 200 lines changed
+- ✅ Include AI Disclosure in PRs
 
-### Making Changes
+## 📋 Project Overview
 
-1. **Create a feature branch** (never work on main/master):
-   ```bash
-   git checkout -b feat/your-feature-name
-   # or
-   git checkout -b fix/issue-description
-   ```
+CardScannerApp (CardSnap) is a **native Kotlin Android application** for scanning business cards using OCR technology.
 
-2. **Make your changes and commit**:
-   ```bash
-   git add .
-   git commit -m "feat: descriptive commit message"
-   ```
+### Tech Stack
+- **Kotlin 1.9.22** with Coroutines + Flow
+- **Jetpack Compose** (Material 3)
+- **CameraX** for camera functionality
+- **ML Kit Text Recognition** for OCR
+- **Room Database** for persistent storage
+- **DataStore Preferences** for app settings
+- **Espresso + Compose Testing** for E2E testing
+- **JUnit 5** for unit testing
 
-3. **Push the branch**:
-   ```bash
-   git push origin feat/your-feature-name
-   ```
+### Build Configuration
+- **AGP**: 8.6.0
+- **Gradle**: 8.8
+- **compileSdk**: 35, **minSdk**: 26, **targetSdk**: 34
+- **KSP**: 1.9.22-1.0.17
 
-4. **Create a Pull Request** using the GitHub CLI:
-   ```bash
-   gh pr create --title "feat: Add new feature" --body "Description of changes"
-   ```
+## 🛠️ Development Commands
 
-5. **Merge after review**:
-   ```bash
-   gh pr merge --squash --delete-branch
-   ```
-
-### Branch Naming Conventions
-
-- `feat/` - New features
-- `fix/` - Bug fixes
-- `docs/` - Documentation changes
-- `refactor/` - Code refactoring
-- `test/` - Test additions/changes
-- `chore/` - Maintenance tasks
-
-### What You MUST NOT Do
-
-- ❌ Never push directly to `main` or `master`
-- ❌ Never use `git push --force` on protected branches
-- ❌ Never delete the `main` or `master` branch
-- ❌ Never commit directly without a PR
-
-### Git Configuration
-
-When working with this repository, ensure your git config includes:
+### Building
 ```bash
-git config user.name "Your Name"
-git config user.email "your.email@example.com"
+cd android
+# Build debug APK
+./gradlew assembleDebug
+
+# Build test APK
+./gradlew assembleDebugAndroidTest
+
+# Run unit tests
+./gradlew testDebugUnitTest
+
+# Run E2E tests (requires running emulator)
+./gradlew connectedAndroidTest
 ```
 
-## Security Considerations
-
-- All changes go through PR review
-- No force pushes allowed
-- Branch deletion is prevented
-- CI checks should pass before merge
-
-## Quick Reference
-
+### Linting
 ```bash
-# Start new work
-git checkout -b feat/new-feature
-
-# After making changes
-git add . && git commit -m "feat: add new feature"
-git push origin feat/new-feature
-
-# Create PR
-gh pr create --title "feat: Add new feature" --body "What it does"
-
-# After PR approved
-gh pr merge --squash --delete-branch
-
-# Back to main
-git checkout main && git pull
+cd android
+./gradlew lint
 ```
+
+## 📁 Project Structure
+
+```
+CardScannerApp/
+├── android/
+│   ├── app/
+│   │   ├── src/
+│   │   │   ├── main/java/com/cardscannerapp/
+│   │   │   │   ├── data/          # Room DB, DAO, Repositories
+│   │   │   │   ├── domain/        # Models, OCR, Parser
+│   │   │   │   ├── ui/            # Screens, Navigation, Theme
+│   │   │   │   ├── util/          # Utilities
+│   │   │   │   └── MainActivity.kt
+│   │   │   ├── androidTest/       # Espresso E2E tests
+│   │   │   └── test/              # JUnit unit tests
+│   │   └── build.gradle.kts
+│   ├── build.gradle.kts
+│   ├── settings.gradle.kts
+│   └── gradle.properties
+├── docs/
+└── assets/
+```
+
+## 🎨 Code Style Guidelines
+
+### Kotlin Conventions
+- Use `val` by default, `var` only when necessary
+- Prefer expression bodies for simple functions
+- Use data classes for models
+- Use sealed classes/interfaces for state
+- Follow Android Kotlin style guide
+- Use coroutines for async operations
+- Use Flow for reactive streams
+
+### Compose Conventions
+- Keep composables small and focused
+- Use `@Composable` functions for UI only
+- Move business logic to ViewModels
+- Use `remember` and `collectAsState()` appropriately
+- Use `Modifier.testTag()` for E2E test identifiers
+
+### Architecture
+- **MVVM pattern**: ViewModel + StateFlow + Compose
+- **Repository pattern**: Data access through repositories
+- **Single Activity**: MainActivity hosts NavHost
+- **Dependency Injection**: Manual DI (no Hilt/Dagger)
+
+## 🧪 Testing Standards
+
+### Unit Tests (JUnit)
+- Location: `android/app/src/test/`
+- Run: `./gradlew testDebugUnitTest`
+- Test domain logic, parsers, utilities
+
+### E2E Tests (Espresso + Compose Testing)
+- Location: `android/app/src/androidTest/`
+- Run: `./gradlew connectedAndroidTest`
+- Requires running Android emulator
+- Use `createAndroidComposeRule<MainActivity>()`
+- Use `Modifier.testTag()` for component identification
+
+## 🔐 Security
+- NO API keys in code
+- Use Android Keystore for sensitive data
+- Run lint before commit
+- Write tests for new features
+
+## 📋 PR Requirements
+
+Every PR MUST include:
+- [ ] Summary (what + why)
+- [ ] Changes (detailed list)
+- [ ] Testing (how to verify)
+- [ ] AI Disclosure (AI-Generated: Yes/No, Model, Platform)
+- [ ] No debug code (Log.d, TODO, FIXME)
+- [ ] No secrets
+- [ ] Lint passes
+
+---
+
+*Last updated: 2026-04-05*
+*Migration: React Native → Native Kotlin Android*
