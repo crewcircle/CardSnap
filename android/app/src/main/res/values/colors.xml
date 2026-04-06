@@ -2,7 +2,7 @@
 <resources>
     <!-- Primary brand colors -->
     <color name="primary">#0066FF</color>
-    <color name="primary_dark">#0052CC</color>
+    <color name="primary_dark">#003DB3</color>
     <color name="primary_light">#3385FF</color>
     
     <!-- Secondary colors -->
@@ -11,9 +11,9 @@
     <color name="secondary_light">#9CA3AF</color>
     
     <!-- Background colors -->
-    <color name="background">#FFFFFF</color>
-    <color name="surface">#F9FAFB</color>
-    <color name="surface_variant">#F3F4F6</color>
+    <color name="background">#F5F7FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#E5E7EB</color>
     
     <!-- Text colors -->
     <color name="on_primary">#FFFFFF</color>
