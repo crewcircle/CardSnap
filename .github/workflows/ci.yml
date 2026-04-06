@@ -48,13 +48,13 @@ jobs:
           ./gradlew assembleRelease --no-daemon
 
       - name: Upload debug APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: app-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload release APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: app-release
           path: android/app/build/outputs/apk/release/app-release-unsigned.apk
