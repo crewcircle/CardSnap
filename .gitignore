@@ -88,6 +88,10 @@ Gemfile.lock
 docs/
 !docs/index.html
 !docs/images/
+!docs/architecture/
+!docs/planning/
+!docs/policy/
+!docs/testing/
 fastlane/
 scripts/
 setup-and-verify.sh
