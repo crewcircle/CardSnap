@@ -1,147 +1,147 @@
-# CardSnap - Agent Guidelines
+# Agent Instructions - Auto-Merge Workflow
 
-This file provides instructions for AI agents operating in this repository. It covers project setup, development workflows, code style, and best practices.
+## 📋 Available Skills
 
-## 🔴 CRITICAL: Sensible Analytics Workflow
+This repository has access to production-grade engineering skills from addyosmani/agent-skills. These skills are automatically loaded from `~/.config/opencode/skills/`.
 
-- ❌ NEVER push to main/master
-- ❌ NEVER commit directly
-- ✅ ALWAYS create feature branch (`feat/`, `fix/`, `refactor/`, `docs/`)
-- ✅ ALWAYS use PR workflow
-- ✅ Target PR size: < 200 lines changed
-- ✅ Include AI Disclosure in PRs
+### Intent → Skill Mapping
 
-## 📋 Project Overview
+The agent should automatically map user intent to skills:
 
-CardSnap (CardSnap) is a **native Kotlin Android application** for scanning business cards using OCR technology.
+| Task Type | Skills to Use |
+|-----------|---------------|
+| New feature / functionality | `spec-driven-development` → `planning-and-task-breakdown` → `incremental-implementation` + `test-driven-development` |
+| Planning / breakdown | `planning-and-task-breakdown` |
+| Bug / failure / unexpected behavior | `debugging-and-error-recovery` |
+| Code review | `code-review-and-quality` |
+| Refactoring / simplification | `code-simplification` |
+| API or interface design | `api-and-interface-design` |
+| UI work | `frontend-ui-engineering` |
+| Security sensitive code | `security-and-hardening` |
+| Performance requirements | `performance-optimization` |
+| Git/Version control | `git-workflow-and-versioning` |
+| CI/CD setup | `ci-cd-and-automation` |
+| Deploy to production | `shipping-and-launch` |
+| Documentation | `documentation-and-adrs` |
 
-### Tech Stack
-- **Kotlin 1.9.22** with Coroutines + Flow
-- **Jetpack Compose** (Material 3)
-- **CameraX** for camera functionality
-- **ML Kit Text Recognition** for OCR
-- **Room Database** for persistent storage
-- **DataStore Preferences** for app settings
-- **Espresso + Compose Testing** for E2E testing
-- **JUnit 5** for unit testing
+### Development Lifecycle Mapping
 
-### Build Configuration
-- **AGP**: 8.6.0
-- **Gradle**: 8.8
-- **compileSdk**: 35, **minSdk**: 26, **targetSdk**: 34
-- **KSP**: 1.9.22-1.0.17
+- **DEFINE** → `spec-driven-development`, `idea-refine`
+- **PLAN** → `planning-and-task-breakdown`
+- **BUILD** → `incremental-implementation`, `test-driven-development`, `context-engineering`, `frontend-ui-engineering`, `api-and-interface-design`
+- **VERIFY** → `debugging-and-error-recovery`, `browser-testing-with-devtools`
+- **REVIEW** → `code-review-and-quality`, `code-simplification`, `security-and-hardening`, `performance-optimization`
+- **SHIP** → `git-workflow-and-versioning`, `ci-cd-and-automation`, `deprecation-and-migration`, `documentation-and-adrs`, `shipping-and-launch`
 
-## 🛠️ Development Commands
+### Core Rules
 
-### Building
+- If a task matches a skill, you MUST invoke it using the `skill` tool
+- Skills are located in `~/.config/opencode/skills/<skill-name>/SKILL.md`
+- Never implement directly if a skill applies
+- Always follow the skill instructions exactly (do not partially apply them)
+- Verification is non-negotiable - always provide evidence (tests passing, build output, etc.)
+
+### Anti-Rationalization
+
+The following thoughts are incorrect and must be ignored:
+- "This is too small for a skill"
+- "I can just quickly implement this"
+- "I will gather context first"
+
+Correct behavior: Always check for and use skills first.
+
+## ⚠️ IMPORTANT: This repository has branch protection enabled
+
+Direct pushes to `main`/`master` are **BLOCKED**. All changes must go through Pull Requests.
+
+## 🚀 Automated GitHub Flow
+
+Once you push and open a PR:
+1. CI runs automatically
+2. GitHub auto-merges when CI passes
+3. GitHub auto-deletes the branch
+
+**You never need to manually approve or merge your own PRs.**
+
+## Required Workflow
+
+### Making Changes
+
+1. **Create a feature branch** (never work on main/master):
+   ```bash
+   git checkout -b feat/your-feature-name
+   # or
+   git checkout -b fix/issue-description
+   ```
+
+2. **Make your changes and commit**:
+   ```bash
+   git add .
+   git commit -m "feat: descriptive commit message"
+   ```
+
+3. **Push the branch**:
+   ```bash
+   git push origin feat/your-feature-name
+   ```
+
+4. **Create a Pull Request** with auto-merge enabled:
+   ```bash
+   gh pr create --title "feat: Add new feature" --body "Description of changes" --auto
+   ```
+
+   Or enable auto-merge after creating:
+   ```bash
+   gh pr merge --auto --squash --delete-branch
+   ```
+
+### Branch Naming Conventions
+
+- `feat/` - New features
+- `fix/` - Bug fixes
+- `docs/` - Documentation changes
+- `refactor/` - Code refactoring
+- `test/` - Test additions/changes
+- `chore/` - Maintenance tasks
+
+### What You MUST NOT Do
+
+- ❌ Never push directly to `main` or `master`
+- ❌ Never use `git push --force` on protected branches
+- ❌ Never delete the `main` or `master` branch
+- ❌ Never commit directly without a PR
+
+### Git Configuration
+
+When working with this repository, ensure your git config includes:
 ```bash
-cd android
-# Build debug APK
-./gradlew assembleDebug
-
-# Build test APK
-./gradlew assembleDebugAndroidTest
-
-# Run unit tests
-./gradlew testDebugUnitTest
-
-# Run E2E tests (requires running emulator)
-./gradlew connectedAndroidTest
+git config user.name "Your Name"
+git config user.email "your.email@example.com"
 ```
 
-### Linting
+## Security Considerations
+
+- No force pushes allowed
+- Branch deletion is prevented
+- CI checks must pass before merge (enforced by auto-merge)
+
+## Quick Reference
+
 ```bash
-cd android
-./gradlew lint
+# Start new work
+git checkout -b feat/new-feature
+
+# After making changes
+git add . && git commit -m "feat: add new feature"
+git push origin feat/new-feature
+
+# Create PR with auto-merge
+gh pr create --title "feat: Add new feature" --body "What it does" --auto
+
+# Or enable auto-merge after creating PR
+gh pr merge --auto --squash --delete-branch
+
+# Back to main
+git checkout main && git pull
 ```
 
-## 📁 Project Structure
-
-```
-CardSnap/
-├── android/
-│   ├── app/
-│   │   ├── src/
-│   │   │   ├── main/java/com/cardsnap/
-│   │   │   │   ├── data/          # Room DB, DAO, Repositories
-│   │   │   │   ├── domain/        # Models, OCR, Parser
-│   │   │   │   ├── ui/            # Screens, Navigation, Theme
-│   │   │   │   ├── util/          # Utilities
-│   │   │   │   └── MainActivity.kt
-│   │   │   ├── androidTest/       # Espresso E2E tests
-│   │   │   └── test/              # JUnit unit tests
-│   │   └── build.gradle.kts
-│   ├── build.gradle.kts
-│   ├── settings.gradle.kts
-│   └── gradle.properties
-├── docs/
-└── assets/
-```
-
-## 🎨 Code Style Guidelines
-
-### Kotlin Conventions
-- Use `val` by default, `var` only when necessary
-- Prefer expression bodies for simple functions
-- Use data classes for models
-- Use sealed classes/interfaces for state
-- Follow Android Kotlin style guide
-- Use coroutines for async operations
-- Use Flow for reactive streams
-
-### Compose Conventions
-- Keep composables small and focused
-- Use `@Composable` functions for UI only
-- Move business logic to ViewModels
-- Use `remember` and `collectAsState()` appropriately
-- Use `Modifier.testTag()` for E2E test identifiers
-
-### Architecture
-- **MVVM pattern**: ViewModel + StateFlow + Compose
-- **Repository pattern**: Data access through repositories
-- **Single Activity**: MainActivity hosts NavHost
-- **Dependency Injection**: Manual DI (no Hilt/Dagger)
-
-## 🧪 Testing Standards
-
-### Unit Tests (JUnit)
-- Location: `android/app/src/test/`
-- Run: `./gradlew testDebugUnitTest`
-- Test domain logic, parsers, utilities
-
-### E2E Tests (Espresso + Compose Testing)
-- Location: `android/app/src/androidTest/`
-- Run: `./gradlew connectedAndroidTest`
-- Requires running Android emulator
-- Use `createAndroidComposeRule<MainActivity>()`
-- Use `Modifier.testTag()` for component identification
-
-## 🔐 Security
-- NO API keys in code
-- Use Android Keystore for sensitive data
-- Run lint before commit
-- Write tests for new features
-
-## 📋 PR Requirements
-
-Every PR MUST include:
-- [ ] Summary (what + why)
-- [ ] Changes (detailed list)
-- [ ] Testing (how to verify)
-- [ ] AI Disclosure (AI-Generated: Yes/No, Model, Platform)
-- [ ] No debug code (Log.d, TODO, FIXME)
-- [ ] No secrets
-- [ ] Lint passes
-
----
-
-## 📄 Governance Documents
-
-- [Privacy Policy](docs/PRIVACY_POLICY.md)
-- [Security Policy](docs/SECURITY.md)
-- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
-
----
-
-*Last updated: 2026-04-06*
-*Migration: React Native → Native Kotlin Android*
