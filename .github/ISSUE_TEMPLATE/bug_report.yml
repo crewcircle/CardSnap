@@ -8,7 +8,7 @@ body:
         Thanks for taking the time to report a bug! Please search existing issues first to avoid duplicates.
         
         ⚠️ **Security Issues**: Do NOT use this template for security vulnerabilities. 
-        Please email [security@sensibleanalytics.co](mailto:security@sensibleanalytics.co) instead.
+        Please email [security@crewcircle.co](mailto:security@crewcircle.co) instead.
 
   - type: checkboxes
     id: pre-flight

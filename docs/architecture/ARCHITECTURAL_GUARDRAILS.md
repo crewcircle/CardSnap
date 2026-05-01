@@ -1,6 +1,6 @@
 # Architectural Guardrails for AI-Generated Code
 
-> **Purpose**: Enforce architectural constraints on AI-generated code at Sensible Analytics
+> **Purpose**: Enforce architectural constraints on AI-generated code at CrewCircle
 > **Audience**: AI agents, developers, and CI/CD pipelines
 > **Last Updated**: April 2026
 
@@ -482,4 +482,4 @@ SPLIT IF:
 
 ---
 
-*These guardrails ensure AI-generated code maintains structural integrity across all Sensible Analytics projects.*
+*These guardrails ensure AI-generated code maintains structural integrity across all CrewCircle projects.*

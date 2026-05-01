@@ -8,8 +8,8 @@
   <strong>Scan a card. Save a contact. Done.</strong>
 </p>
 
-[![CI](https://github.com/Sensible-Analytics/CardScannerApp/actions/workflows/ci.yml/badge.svg)](https://github.com/Sensible-Analytics/CardScannerApp/actions/workflows/ci.yml)
-[![Android Build](https://github.com/Sensible-Analytics/CardScannerApp/actions/workflows/android-build.yml/badge.svg)](https://github.com/Sensible-Analytics/CardScannerApp/actions/workflows/android-build.yml)
+[![CI](https://github.com/crewcircle/CardScannerApp/actions/workflows/ci.yml/badge.svg)](https://github.com/crewcircle/CardScannerApp/actions/workflows/ci.yml)
+[![Android Build](https://github.com/crewcircle/CardScannerApp/actions/workflows/android-build.yml/badge.svg)](https://github.com/crewcircle/CardScannerApp/actions/workflows/android-build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg)](https://kotlinlang.org)
 [![Min SDK](https://img.shields.io/badge/Min%20SDK-26-green.svg)](https://developer.android.com/distribute/best-practices/develop/target-sdk)
@@ -18,7 +18,7 @@
 
 CardSnap is a professional business card scanner built with **native Kotlin** and **Jetpack Compose**. It uses Google's ML Kit for OCR to extract contact details from business card photos, then intelligently parses and saves them to your device contacts.
 
-🌐 **[Try CardSnap](https://sensible-analytics.github.io/CardScannerApp/)** | [Download APK](https://github.com/Sensible-Analytics/CardScannerApp/releases) | [Report Bug](https://github.com/Sensible-Analytics/CardScannerApp/issues)
+🌐 **[Try CardSnap](https://crewcircle.github.io/CardScannerApp/)** | [Download APK](https://github.com/crewcircle/CardScannerApp/releases) | [Report Bug](https://github.com/crewcircle/CardScannerApp/issues)
 
 ---
 
@@ -86,8 +86,8 @@ CardSnap follows the **MVVM architecture** with clean separation of concerns:
 
 | Version | Type | Link |
 |---------|------|------|
-| Latest Debug APK | Debug | [Download from Releases](https://github.com/Sensible-Analytics/CardScannerApp/releases) |
-| Latest Release APK | Release | [Download from Releases](https://github.com/Sensible-Analytics/CardScannerApp/releases) |
+| Latest Debug APK | Debug | [Download from Releases](https://github.com/crewcircle/CardScannerApp/releases) |
+| Latest Release APK | Release | [Download from Releases](https://github.com/crewcircle/CardScannerApp/releases) |
 
 ---
 
@@ -136,7 +136,7 @@ Review the extracted contact details, edit any fields if needed, then save to yo
 
 ```bash
 # Clone the repository
-git clone https://github.com/Sensible-Analytics/CardScannerApp.git
+git clone https://github.com/crewcircle/CardScannerApp.git
 cd CardScannerApp
 
 # Build debug APK
@@ -185,11 +185,11 @@ We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) 
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/Sensible-Analytics/CardScannerApp/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Sensible-Analytics/CardScannerApp/discussions)
+- **Issues**: [GitHub Issues](https://github.com/crewcircle/CardScannerApp/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/crewcircle/CardScannerApp/discussions)
 
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/Sensible-Analytics">Sensible Analytics</a>
+  Made with ❤️ by <a href="https://github.com/crewcircle">CrewCircle</a>
 </p>

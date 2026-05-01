@@ -69,4 +69,4 @@ If you have questions about this Privacy Policy, please contact us:
 
 **Email**: privacy@cardsnap.app
 
-**GitHub**: https://github.com/Sensible-Analytics/CardSnap
+**GitHub**: https://github.com/crewcircle/CardSnap

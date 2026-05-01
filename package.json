@@ -5,12 +5,12 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Sensible-Analytics/CardSnap.git"
+    "url": "https://github.com/crewcircle/CardSnap.git"
   },
   "bugs": {
-    "url": "https://github.com/Sensible-Analytics/CardSnap/issues"
+    "url": "https://github.com/crewcircle/CardSnap/issues"
   },
-  "homepage": "https://github.com/Sensible-Analytics/CardSnap#readme",
+  "homepage": "https://github.com/crewcircle/CardSnap#readme",
   "keywords": [
     "kotlin",
     "android",
@@ -21,6 +21,6 @@
     "jetpack-compose",
     "ml-kit"
   ],
-  "author": "Sensible Analytics",
+  "author": "CrewCircle",
   "license": "MIT"
 }
