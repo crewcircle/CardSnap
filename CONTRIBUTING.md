@@ -41,7 +41,7 @@ Thank you for considering contributing to CardSnap! Please read this guide to un
 ### Installation
 
 ```bash
-git clone https://github.com/Sensible-Analytics/CardSnap.git
+git clone https://github.com/crewcircle/CardSnap.git
 cd CardSnap
 npm install
 cd ios && pod install && cd ..

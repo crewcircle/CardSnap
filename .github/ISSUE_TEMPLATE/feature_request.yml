@@ -7,7 +7,7 @@ body:
       value: |
         Thanks for taking the time to suggest a feature! Please search existing issues and discussions first.
         
-        💡 **Tip**: For questions or help, use [Discussions](https://github.com/orgs/Sensible-Analytics/discussions) instead.
+        💡 **Tip**: For questions or help, use [Discussions](https://github.com/orgs/crewcircle/discussions) instead.
 
   - type: checkboxes
     id: pre-flight

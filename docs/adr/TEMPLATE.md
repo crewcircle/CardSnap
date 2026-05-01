@@ -85,8 +85,8 @@ What becomes easier or more difficult to do because of this change?
 
 ## References
 
-- [Related Issue #NNN](https://github.com/Sensible-Analytics/CardSnap/issues/NNN)
-- [Related PR #NNN](https://github.com/Sensible-Analytics/CardSnap/pull/NNN)
+- [Related Issue #NNN](https://github.com/crewcircle/CardSnap/issues/NNN)
+- [Related PR #NNN](https://github.com/crewcircle/CardSnap/pull/NNN)
 - [External Documentation](url)
 
 ---
