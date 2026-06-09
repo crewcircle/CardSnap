@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: CardSnap
+  description: "Scan business cards instantly - OCR-powered mobile app for Android and iOS"
+  annotations:
+    github.com/project-slug: crewcircle/CardSnap
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  lifecycle: production
+  owner: crewcircle/engineering
