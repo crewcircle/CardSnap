@@ -38,6 +38,7 @@ import coil.compose.AsyncImage
 import com.cardsnap.data.db.ContactDatabase
 import com.cardsnap.data.repository.ContactRepository
 import com.cardsnap.data.repository.SettingsRepository
+import com.cardsnap.domain.Confidence
 import com.cardsnap.ui.theme.*
 import com.cardsnap.util.HapticFeedback
 import com.cardsnap.util.NetworkMonitor
@@ -76,8 +77,8 @@ fun ScanScreen(imageUri: String? = null, onNavigateToContacts: () -> Unit = {}, 
     if (uiState.showResults) ScanResultsView(uiState = uiState, viewModel = viewModel, context = context, onReset = { viewModel.resetState() }, onNavigateToContacts = onNavigateToContacts)
     else CameraView(uiState = uiState, viewModel = viewModel, context = context, lifecycleOwner = lifecycleOwner, onNavigateToContacts = onNavigateToContacts, onNavigateToSettings = onNavigateToSettings, onPickImage = { imagePickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)) })
 
-    if (uiState.errorMessage != null) {
-        AlertDialog(onDismissRequest = { viewModel.clearError() }, title = { Text("Error") }, text = { Text(uiState.errorMessage!!) }, confirmButton = { TextButton(onClick = { viewModel.clearError() }) { Text("OK") } })
+    if (uiState.error != null) {
+        AlertDialog(onDismissRequest = { viewModel.clearError() }, title = { Text("Error") }, text = { Text(uiState.error!!.userFacingMessage) }, confirmButton = { TextButton(onClick = { viewModel.clearError() }) { Text("OK") } })
     }
 }
 
@@ -142,6 +143,26 @@ private fun ScanResultsView(uiState: ScanUiState, viewModel: ScanViewModel, cont
     Scaffold(topBar = { TopAppBar(title = { Text("Review Contact") }, navigationIcon = { IconButton(onClick = onReset) { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back") } }) }) { padding ->
         Column(modifier = Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp)) {
             uiState.capturedImage?.let { uri -> AsyncImage(model = uri, contentDescription = "Captured card", modifier = Modifier.fillMaxWidth().height(200.dp)); Spacer(modifier = Modifier.height(16.dp)) }
+            uiState.confidence?.let { confidence ->
+                val (label, color, icon) = when (confidence) {
+                    Confidence.HIGH -> Triple("High confidence", Success, Icons.Default.CheckCircle)
+                    Confidence.MEDIUM -> Triple("Medium confidence", Warning, null)
+                    Confidence.LOW -> Triple("Low confidence", MaterialTheme.colorScheme.error, Icons.Default.Warning)
+                }
+                Surface(
+                    shape = MaterialTheme.shapes.small,
+                    color = color.copy(alpha = 0.15f),
+                    modifier = Modifier.padding(bottom = 8.dp)
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
+                        if (icon != null) {
+                            Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(14.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                        }
+                        Text(label, style = MaterialTheme.typography.labelSmall, color = color)
+                    }
+                }
+            }
 OutlinedTextField(value = name, onValueChange = { value -> name = value }, label = { Text("Name") }, modifier = Modifier.fillMaxWidth().testTag("field-name"), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text))
 Spacer(modifier = Modifier.height(8.dp))
 OutlinedTextField(value = email, onValueChange = { value -> email = value }, label = { Text("Email") }, modifier = Modifier.fillMaxWidth().testTag("field-email"), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
