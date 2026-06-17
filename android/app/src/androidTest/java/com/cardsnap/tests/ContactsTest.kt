@@ -38,4 +38,15 @@ class ContactsTest {
         composeRule.onNodeWithText("Back").performClick()
         composeRule.onNodeWithTag("scan-screen").assertIsDisplayed()
     }
+
+    @Test fun contacts_05_importButton_isVisible() {
+        composeRule.onNodeWithTag("contacts-button").performClick()
+        composeRule.onNodeWithTag("import-vcard-button").assertIsDisplayed()
+    }
+
+    @Test fun contacts_06_exportButton_visibleAfterImport() {
+        composeRule.onNodeWithTag("contacts-button").performClick()
+        composeRule.onNodeWithTag("import-vcard-button").assertIsDisplayed()
+        composeRule.onNodeWithTag("export-all-contacts-button").assertIsDisplayed()
+    }
 }
