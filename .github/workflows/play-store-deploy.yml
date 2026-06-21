@@ -1,0 +1,79 @@
+name: Deploy to Google Play Store
+
+on:
+  workflow_dispatch:
+    inputs:
+      track:
+        description: 'Release track'
+        type: choice
+        options:
+          - internal
+          - alpha
+          - beta
+          - production
+        default: 'internal'
+      versionName:
+        description: 'Version name (e.g., 1.0.1)'
+        required: true
+      versionCode:
+        description: 'Version code (integer, must be higher than previous)'
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Build and Deploy to Play Store
+    runs-on: ubuntu-latest
+    env:
+      JAVA_VERSION: 17
+      APPLICATION_ID: com.cardsnap
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: temurin
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x android/gradlew
+
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.PLAY_STORE_KEYSTORE_BASE64 }}" | base64 -d > android/app/release.keystore
+          echo "keystore decoded"
+
+      - name: Update version in build.gradle.kts
+        run: |
+          sed -i "s/versionCode = .*/versionCode = ${{ github.event.inputs.versionCode }}/" android/app/build.gradle.kts
+          sed -i "s/versionName = \".*\"/versionName = \"${{ github.event.inputs.versionName }}\"/" android/app/build.gradle.kts
+
+      - name: Build Release AAB
+        run: |
+          cd android
+          ./gradlew bundleRelease --no-daemon \
+            -Pandroid.injected.signing.store.file=../app/release.keystore \
+            -Pandroid.injected.signing.store.password=${{ secrets.PLAY_STORE_KEYSTORE_PASSWORD }} \
+            -Pandroid.injected.signing.key.alias=${{ secrets.PLAY_STORE_KEY_ALIAS }} \
+            -Pandroid.injected.signing.key.password=${{ secrets.PLAY_STORE_KEY_PASSWORD }}
+
+      - name: Upload AAB to Google Play
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_STORE_SERVICE_ACCOUNT_JSON }}
+          packageName: ${{ env.APPLICATION_ID }}
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: ${{ github.event.inputs.track }}
+          status: completed
+          skipUploadApks: true
+          skipUploadAab: false
+          mappingFile: android/app/build/outputs/mapping/release/mapping.txt
